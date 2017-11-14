@@ -6,9 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import java.sql.*;
-import java.util.List;
-
 public class AddComponentActivity extends AppCompatActivity {
 
     @Override
@@ -18,7 +15,7 @@ public class AddComponentActivity extends AppCompatActivity {
     }
 
     /** Called when the user taps the Save button is clicked*/
-    public void openAddComponentUi(View view) { // view is the View object that was clicked
+    public void saveComponent(View view) { // view is the View object that was clicked
         EditText editText = (EditText) findViewById(R.id.componentIdText);
         // check for empty string
         Log.i("AddComponentActivity", "Component ID: " + editText.getText().toString());

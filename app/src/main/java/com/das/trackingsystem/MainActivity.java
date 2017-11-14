@@ -24,4 +24,16 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddComponentActivity.class);
         startActivity(intent);
     }
+
+    /** Called when the user taps the Add component button */
+    public void openAddProductUi(View view) { // view is the View object that was clicked
+        // Do something in response to button
+        Button btn = (Button)view;
+        Log.w("", "we clicked the btn PRODUCT " + btn.getText().toString());
+
+        Intent intent = new Intent(this, AddProductActivity.class);
+        startActivity(intent);
+    }
+
+
 }

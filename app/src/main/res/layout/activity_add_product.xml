@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.das.trackingsystem.AddComponentActivity">
+    tools:context="com.das.trackingsystem.AddProductActivity">
 
     <EditText
-        android:id="@+id/componentIdText"
+        android:id="@+id/productIdText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="@string/add_component"
+        android:hint="@string/add_product"
         android:inputType="textPersonName"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginRight="16dp"
-        android:onClick="saveComponent"
+        android:onClick="saveProduct"
         android:text="@string/save_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
