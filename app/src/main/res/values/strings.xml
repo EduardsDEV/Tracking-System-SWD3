@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Tracking System</string>
+    <string name="add_component">Scan component ID</string>
+    <string name="save_button">Save</string>
+</resources>
