@@ -3,4 +3,5 @@
     <string name="add_component">Scan component ID</string>
     <string name="save_button">Save</string>
     <string name="add_product">Scan product ID</string>
+    <string name="add_invoice">Scan invoice ID</string>
 </resources>

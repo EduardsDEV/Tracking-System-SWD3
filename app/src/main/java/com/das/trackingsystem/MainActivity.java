@@ -34,6 +34,14 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddProductActivity.class);
         startActivity(intent);
     }
+    public void openAddInvoiceUi(View view) { // view is the View object that was clicked
+        // Do something in response to button
+        Button btn = (Button)view;
+        Log.w("", "we clicked the btn Invoice " + btn.getText().toString());
+
+        Intent intent = new Intent(this, AddInvoiceActivity.class);
+        startActivity(intent);
+    }
 
 
 }
