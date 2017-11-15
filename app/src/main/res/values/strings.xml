@@ -5,4 +5,5 @@
     <string name="add_product">Scan product ID</string>
     <string name="add_product_component">Scan component ID</string>
     <string name="add_invoice">Scan invoice ID</string>
+    <string name="product_id_prompt">Scan ID of product</string>
 </resources>
