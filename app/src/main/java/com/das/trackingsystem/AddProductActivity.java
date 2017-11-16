@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -21,22 +22,35 @@ public class AddProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
+//        findViewById(R.id.productIdText).requestFocus();
+        LinearLayout layout = (LinearLayout) findViewById(R.id.activity_add_product_componentsLayout);
+        final EditText editText = new EditText(this);
+        editText.setHint(R.string.add_product_component);
+        layout.addView(editText);
+        editText.addTextChangedListener(new MyTextWatcher(editText, layout));
     }
+
 
     /**
      * Called when the user taps the Save button is clicked
      */
     public void saveProduct(View view) { // view is the View object that was clicked
         EditText editText = (EditText) findViewById(R.id.productIdText);
-        // check for empty string
-        String uniqueCode = editText.getText().toString();
-        EditText editTextC = (EditText) findViewById(R.id.componentIdText);
-        String componentUniqueCode = editTextC.getText().toString();
-        if (Utility.isNotNull(uniqueCode) && Utility.isNotNull(componentUniqueCode)) {
-            RequestParams requestParams = new RequestParams("uniqueCode", uniqueCode);
-            requestParams.add("componentUniqueCode", componentUniqueCode);
+        String productUniqueCode = editText.getText().toString();
+        if (Utility.isNotNull(productUniqueCode)) {
+            RequestParams requestParams = new RequestParams("uniqueCode", productUniqueCode);
+            LinearLayout layout = (LinearLayout) findViewById(R.id.activity_add_product_componentsLayout);
+            for (int i = 0; i < layout.getChildCount(); i++) {
+                EditText componentText = (EditText) layout.getChildAt(i);
+                String componentUniqueCode = componentText.getText().toString();
+                if (Utility.isNotNull(componentUniqueCode)) {
+                    requestParams.add("componentsUniqueCodes[]", componentUniqueCode);
+                }
+            }
             Log.i("AddProductActivity", "Saving Product with ID: " + editText.getText().toString());
             invokeWebService(requestParams);
+        } else {
+            Log.e("SaveProduct", "Product ID is empty");
         }
     }
 
@@ -70,19 +84,4 @@ public class AddProductActivity extends AppCompatActivity {
             }
         });
     }
-
-
-    public void addNewComponentField(View view) {
-//        LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout);
-//
-//        Button b = new Button(this);
-//        b.setText("A" + (layout.getChildCount() + 1));
-//        LinearLayout hor = new LinearLayout(this);
-//        TextView textView = new TextView(this);
-//        textView.setText("Component #" + (layout.getChildCount() + 1));
-//        hor.addView(textView);
-//        hor.addView(b);
-//        layout.addView(hor);
-    }
-
 }
