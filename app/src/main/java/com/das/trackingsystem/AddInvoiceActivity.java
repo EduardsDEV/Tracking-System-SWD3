@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -21,20 +22,31 @@ public class AddInvoiceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_invoice);
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.activity_add_invoice_productsLayout);
+        final EditText editText = new EditText(this);
+        editText.setHint(R.string.product_id_prompt);
+        layout.addView(editText);
+        editText.addTextChangedListener(new MyTextWatcher(editText, layout));
     }
 
-    /** Called when the user taps the Save button is clicked*/
+    /**
+     * Called when the user taps the Save button is clicked
+     */
     public void saveInvoice(View view) { // view is the View object that was clicked
         EditText invoiceIdEditText = (EditText) findViewById(R.id.invoiceIdText);
 
-        String uniqueCode = invoiceIdEditText.getText().toString();
-        String product1UniqueCode = ((EditText) findViewById(R.id.product1IdEditText)).getText().toString();
-        String product2UniqueCode = ((EditText) findViewById(R.id.product2IdEditText)).getText().toString();
-        if (Utility.isNotNull(uniqueCode) && Utility.isNotNull(product1UniqueCode) && Utility.isNotNull(product2UniqueCode)) {
-            RequestParams requestParams = new RequestParams("uniqueCode", uniqueCode);
-            requestParams.add("productsUniqueCodes[]", product1UniqueCode);
-            requestParams.add("productsUniqueCodes[]", product2UniqueCode);
-
+        String invoiceUniqueCode = invoiceIdEditText.getText().toString();
+        if (Utility.isNotNull(invoiceUniqueCode)) {
+            RequestParams requestParams = new RequestParams("uniqueCode", invoiceUniqueCode);
+            LinearLayout layout = (LinearLayout) findViewById(R.id.activity_add_invoice_productsLayout);
+            for (int i = 0; i < layout.getChildCount(); i++) {
+                EditText productText = (EditText) layout.getChildAt(i);
+                String productUniqueCode = productText.getText().toString();
+                if (Utility.isNotNull(productUniqueCode)) {
+                    requestParams.add("productsUniqueCodes[]", productUniqueCode);
+                }
+            }
             // add info about customer
             requestParams.add("firstName", "dummyFirstName");
             requestParams.add("lastName", "dummyLastName");
@@ -42,11 +54,11 @@ public class AddInvoiceActivity extends AppCompatActivity {
             requestParams.add("address", "saint carolina");
             requestParams.add("phoneNumber", "50 23 48 91");
 
-            Log.i("AddInvoiceActivity", "Saving Invoice with ID: " + uniqueCode);
+            Log.i("AddInvoiceActivity", "Saving Invoice with ID: " + invoiceUniqueCode);
             invokeWebService(requestParams);
+        } else {
+            Log.e("SaveInvoice", "Invoice ID is empty");
         }
-
-        Log.i("AddInvoiceActivity", "Invoice ID: " + invoiceIdEditText.getText().toString());
     }
 
     public void invokeWebService(RequestParams requestParams) {

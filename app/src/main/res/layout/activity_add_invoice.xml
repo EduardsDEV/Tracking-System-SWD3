@@ -30,28 +30,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <EditText
-        android:id="@+id/product1IdEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="364dp"
+        android:layout_height="369dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/product_id_prompt"
-        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/invoiceIdText" />
+        app:layout_constraintTop_toBottomOf="@+id/invoiceIdText">
 
-    <EditText
-        android:id="@+id/product2IdEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/product_id_prompt"
-        android:inputType="textPersonName"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product1IdEditText" />
+        <LinearLayout
+            android:id="@+id/activity_add_invoice_productsLayout"
+            android:layout_width="225dp"
+            android:layout_height="305dp"
+            android:orientation="vertical"></LinearLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
