@@ -1,5 +1,7 @@
 package com.das.trackingsystem;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,6 +39,7 @@ public class AddInvoiceActivity extends AppCompatActivity {
         EditText invoiceIdEditText = (EditText) findViewById(R.id.invoiceIdText);
 
         String invoiceUniqueCode = invoiceIdEditText.getText().toString();
+        AlertDialog alertDialog = new AlertDialog.Builder(AddInvoiceActivity.this).create();
         if (Utility.isNotNull(invoiceUniqueCode)) {
             RequestParams requestParams = new RequestParams("uniqueCode", invoiceUniqueCode);
             LinearLayout layout = (LinearLayout) findViewById(R.id.activity_add_invoice_productsLayout);
@@ -53,11 +56,28 @@ public class AddInvoiceActivity extends AppCompatActivity {
             requestParams.add("email", "dummyEmail@gma.com");
             requestParams.add("address", "saint carolina");
             requestParams.add("phoneNumber", "50 23 48 91");
-
+            alertDialog.setTitle("Info");
+            alertDialog.setMessage("Invoice was saved");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
             Log.i("AddInvoiceActivity", "Saving Invoice with ID: " + invoiceUniqueCode);
             invokeWebService(requestParams);
         } else {
             Log.e("SaveInvoice", "Invoice ID is empty");
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage("Please provide Invoice ID");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
         }
     }
 

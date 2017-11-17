@@ -1,5 +1,7 @@
 package com.das.trackingsystem;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -34,19 +36,40 @@ public class AddComponentActivity extends AppCompatActivity {
     public void saveComponent(View view) { // view is the View object that was clicked
         LinearLayout componentsLayout = (LinearLayout) findViewById(R.id.activity_add_components_componentsLayout);
         RequestParams requestParams = new RequestParams();
+        AlertDialog alertDialog = new AlertDialog.Builder(AddComponentActivity.this).create();
+
         for (int i = 0; i < componentsLayout.getChildCount(); i++) {
             String uniqueCode = ((EditText)componentsLayout.getChildAt(i)).getText().toString();
             // check for empty string
             if (Utility.isNotNull(uniqueCode)) {
                 Log.i("AddComponentActivity", "Saving Component with ID: " + uniqueCode);
                 requestParams.add("uniqueCodes", uniqueCode);
+                alertDialog.setTitle("Info");
+                alertDialog.setMessage("Component was saved");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
             }
         }
         if(requestParams.has("uniqueCodes")) { // if at least 1 component was scanned
             invokeWebService(requestParams);
+
         }else{
             // Display Snackbar pop-up
             Log.i("AddComponentActivity", "No components scanned. No action taken");
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage("Please provide Component ID");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
         }
     }
 

@@ -1,5 +1,7 @@
 package com.das.trackingsystem;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -37,6 +39,7 @@ public class AddProductActivity extends AppCompatActivity {
     public void saveProduct(View view) { // view is the View object that was clicked
         EditText editText = (EditText) findViewById(R.id.productIdText);
         String productUniqueCode = editText.getText().toString();
+        AlertDialog alertDialog = new AlertDialog.Builder(AddProductActivity.this).create();
         if (Utility.isNotNull(productUniqueCode)) {
             RequestParams requestParams = new RequestParams("uniqueCode", productUniqueCode);
             LinearLayout layout = (LinearLayout) findViewById(R.id.activity_add_product_componentsLayout);
@@ -49,8 +52,27 @@ public class AddProductActivity extends AppCompatActivity {
             }
             Log.i("AddProductActivity", "Saving Product with ID: " + editText.getText().toString());
             invokeWebService(requestParams);
+            alertDialog.setTitle("Info");
+            alertDialog.setMessage("Product was saved");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
         } else {
             Log.e("SaveProduct", "Product ID is empty");
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage("Please provide Product ID");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+
         }
     }
 
