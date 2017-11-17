@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -21,19 +22,31 @@ public class AddComponentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_component);
+
+        LinearLayout layout = (LinearLayout) findViewById(R.id.activity_add_components_componentsLayout);
+        final EditText editText = (EditText) findViewById(R.id.componentIdText);
+        editText.addTextChangedListener(new MyTextWatcher(editText, layout));
     }
 
     /**
      * Called when the user taps the Save button is clicked
      */
     public void saveComponent(View view) { // view is the View object that was clicked
-        EditText editText = (EditText) findViewById(R.id.componentIdText);
-        // check for empty string
-        String uniqueCode = editText.getText().toString();
-        if (Utility.isNotNull(uniqueCode)) {
-            RequestParams requestParams = new RequestParams("uniqueCode", uniqueCode);
-            Log.i("AddComponentActivity", "Saving Component with ID: " + editText.getText().toString());
+        LinearLayout componentsLayout = (LinearLayout) findViewById(R.id.activity_add_components_componentsLayout);
+        RequestParams requestParams = new RequestParams();
+        for (int i = 0; i < componentsLayout.getChildCount(); i++) {
+            String uniqueCode = ((EditText)componentsLayout.getChildAt(i)).getText().toString();
+            // check for empty string
+            if (Utility.isNotNull(uniqueCode)) {
+                Log.i("AddComponentActivity", "Saving Component with ID: " + uniqueCode);
+                requestParams.add("uniqueCodes", uniqueCode);
+            }
+        }
+        if(requestParams.has("uniqueCodes")) { // if at least 1 component was scanned
             invokeWebService(requestParams);
+        }else{
+            // Display Snackbar pop-up
+            Log.i("AddComponentActivity", "No components scanned. No action taken");
         }
     }
 
