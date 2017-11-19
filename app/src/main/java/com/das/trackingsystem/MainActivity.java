@@ -15,33 +15,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    /** Called when the user taps the Add component button */
+    /**
+     * Called when the user taps the Add component button
+     */
     public void openAddComponentUi(View view) { // view is the View object that was clicked
-        // Do something in response to button
-        Button btn = (Button)view;
-        Log.w("", "we clicked the btn " + btn.getText().toString());
-
         Intent intent = new Intent(this, AddComponentActivity.class);
         startActivity(intent);
     }
 
-    /** Called when the user taps the Add component button */
+    /**
+     * Called when the user taps the Add component button
+     */
     public void openAddProductUi(View view) { // view is the View object that was clicked
-        // Do something in response to button
-        Button btn = (Button)view;
-        Log.w("", "we clicked the btn PRODUCT " + btn.getText().toString());
-
         Intent intent = new Intent(this, AddProductActivity.class);
         startActivity(intent);
     }
-    public void openAddInvoiceUi(View view) { // view is the View object that was clicked
-        // Do something in response to button
-        Button btn = (Button)view;
-        Log.w("", "we clicked the btn Invoice " + btn.getText().toString());
 
+    public void openAddInvoiceUi(View view) { // view is the View object that was clicked
         Intent intent = new Intent(this, AddInvoiceActivity.class);
         startActivity(intent);
     }
 
 
+    public void openAddComponentsRangeUi(View view) {
+        Intent intent = new Intent(this, AddComponentsInRangeActivity.class);
+        startActivity(intent);
+    }
 }
