@@ -21,29 +21,37 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddComponentActivity">
-            android:parentActivityName=".MainActivity" >
+        <activity
+            android:name=".AddComponentActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".AddProductActivity">
-            android:parentActivityName=".MainActivity" >
+        <activity
+            android:name=".AddProductActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".AddInvoiceActivity">
-            android:parentActivityName=".MainActivity" >
+        <activity
+            android:name=".AddInvoiceActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".AddComponentsInRangeActivity">
-            android:parentActivityName=".MainActivity" >
+        <activity
+            android:name=".AddComponentsInRangeActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
