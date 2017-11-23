@@ -8,4 +8,8 @@
     <string name="product_id_prompt">Scan ID of product</string>
     <string name="start_boundary_message">Scan ID of start boundary</string>
     <string name="end_boundary_message">Scan ID of end boundary</string>
+    <string name="add_components_in_range_button">Add Components in Range</string>
+    <string name="add_component_button">Add component</string>
+    <string name="build_link_button">Build link</string>
+    <string name="build_shipping_button">Build shipping</string>
 </resources>
