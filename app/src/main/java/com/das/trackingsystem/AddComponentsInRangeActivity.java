@@ -49,7 +49,9 @@ public class AddComponentsInRangeActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                findViewById(R.id.endBoundaryId).requestFocus();
+                if(s.toString().length() == 7) {
+                    findViewById(R.id.endBoundaryId).requestFocus();
+                }
             }
         });
     }

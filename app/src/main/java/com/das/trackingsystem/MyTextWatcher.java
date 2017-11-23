@@ -12,8 +12,8 @@ import android.widget.LinearLayout;
 public class MyTextWatcher implements TextWatcher {
 
     private final EditText previousEditText;
-//    private final TextWatcher previousTextWatcher;
-    private final  LinearLayout layout;
+    //    private final TextWatcher previousTextWatcher;
+    private final LinearLayout layout;
 
     public MyTextWatcher(EditText previousEditText, LinearLayout layout) {
         super();
@@ -34,12 +34,14 @@ public class MyTextWatcher implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable s) {
-        if (previousEditText != null) {
-            previousEditText.removeTextChangedListener(this);
+        if (s.toString().length() == 7) { // FIXME: 23-Nov-17 It adds a newline character
+            if (previousEditText != null) {
+                previousEditText.removeTextChangedListener(this);
+            }
+            final EditText newEditText = new EditText(previousEditText.getContext());
+            newEditText.requestFocus();
+            newEditText.addTextChangedListener(new MyTextWatcher(newEditText, layout));
+            layout.addView(newEditText);
         }
-        final EditText newEditText = new EditText(previousEditText.getContext());
-        newEditText.requestFocus();
-        newEditText.addTextChangedListener(new MyTextWatcher(newEditText, layout));
-        layout.addView(newEditText);
     }
 }
