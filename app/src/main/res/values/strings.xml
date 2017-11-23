@@ -11,6 +11,6 @@
     <string name="add_components_in_range_button">Add Components in Range</string>
     <string name="add_component_button">Add component</string>
     <string name="build_link_button">Build link</string>
-    <string name="build_shipping_button">Build shipping</string>
+    <string name="delete_component_button">Delete component</string>
     <string name="dialog_select_employee">Select employee</string>
 </resources>

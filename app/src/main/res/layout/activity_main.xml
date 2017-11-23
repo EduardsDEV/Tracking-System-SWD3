@@ -52,7 +52,7 @@
         android:layout_weight="1"
         android:layout_marginTop="1dp"
         android:onClick="openAddInvoiceUi"
-        android:text="@string/build_shipping_button"
+        android:text="@string/delete_component_button"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
